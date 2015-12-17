@@ -22,6 +22,7 @@ import com.facebook.react.uimanager.events.NativeGestureUtil;
 public class ReactHorizontalScrollView extends HorizontalScrollView {
 
   private final OnScrollDispatchHelper mOnScrollDispatchHelper = new OnScrollDispatchHelper();
+  private boolean scrollEnabled = true;
 
   public ReactHorizontalScrollView(Context context) {
     super(context);
@@ -53,7 +54,7 @@ public class ReactHorizontalScrollView extends HorizontalScrollView {
 
   @Override
   public boolean onInterceptTouchEvent(MotionEvent ev) {
-    if (super.onInterceptTouchEvent(ev)) {
+    if (this.scrollEnabled && super.onInterceptTouchEvent(ev)) {
       NativeGestureUtil.notifyNativeGestureStarted(this, ev);
       return true;
     }
